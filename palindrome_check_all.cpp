@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <bits/stdc++.h>
+#include <string.h>
 
 using namespace std;
 
@@ -14,80 +15,51 @@ bool isNumber(string s)
     return true;
 }
 
-int oneDigitExists(int num)
-{
-    return (num < 10 && num >= 0);
-}
+bool isPalindrome(string inpStr) {
 
-bool isPalindromUtil(int num, int* dupN)
-{
-   if (oneDigitExists(num))
-        return (num == (*dupN) % 10);
+    if (isNumber(inpStr)) {        // Handling Integer
+        cout << "Input is an Integer." << endl;
 
-    if (!isPalindromUtil(num / 10, dupN))
-        return false;
+        int origNum = stoi(inpStr);  // Temporary variable for assigning input variable
+        int revNum = 0, tmpOrig = 0, remainder;
 
-    *dupN /= 10;
+        tmpOrig = origNum;
 
-    return (num % 10 == (*dupN) % 10);
-}
-// Palindrome Checking on Integer value
-int isPalindromInt(int num)
-{
-    if (num < 0)
-        num = -num;
-    int* dupNumber = new int(num);
-
-    return isPalindromUtil(num, dupNumber);
-}
-
-bool isPalindromeChk(char str[], int s, int e)
-{
-	if (s == e)
-	return true;
-
-	if (str[s] != str[e])
-	return false;
-
-	if (s < e + 1)
-	return isPalindromeChk(str, s + 1, e - 1);
-
-	return true;
-}
-
-// Palindrome Checking on String
-bool isPalindromStr(char str[])
-{
-	int n = strlen(str);
-
-	if (n == 0)
-		return true;
-
-	return isPalindromeChk(str, 0, n - 1);
-}
-
-// Checking Input and start determining for Palindrome
-void check_input_n_determine(string str1) {
-      if (isNumber(str1)) {        // Handling Integer
-            cout << "Input is an Integer." << endl;
-            int numCheckPal = stoi(str1);  // Temporary variable for assigning iput variable
-
-            isPalindromInt(numCheckPal) ? printf("%d: Palindrome Number\n", numCheckPal) : printf("%d: NOT Palindrome Number\n", numCheckPal);
+        while( tmpOrig != 0 )
+        {
+            remainder = tmpOrig % 10;
+            revNum = revNum * 10 + remainder;
+            tmpOrig = tmpOrig / 10;
         }
-        else {     // Handling String
-            cout << "Input is a String."  << endl;
-            int n = str1.length();
 
-            char orig_array[n+1];
-            strcpy(orig_array, str1.c_str());
+        if (origNum == revNum) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-            transform(str1.begin(), str1.end(), str1.begin(), ::tolower); // Converting lower case to handle in efficient way
+    // Handling String
+    cout << "Input is a String."  << endl;
 
-            char char_array[n+1];
-            strcpy(char_array, str1.c_str());
+    int n = inpStr.length() - 1;
+    int l = 0;
 
-            isPalindromStr(char_array) ? printf("%s: Palindrome String\n", orig_array) : printf("%s: NOT Palindrome String\n", orig_array);
-      }
+    transform(inpStr.begin(), inpStr.end(), inpStr.begin(), ::tolower); // Converting lower case to handle in efficient way
+
+    char char_array[n+1];
+    strcpy(char_array, inpStr.c_str());
+
+    // Keep comparing characters while they are same
+    while (n > l)
+    {
+        if (char_array[l++] != char_array[n--])
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 // Main function
@@ -100,7 +72,12 @@ int main()
 
     if (str.length() > 0) {
         cout << "VALID INPUT PROVIDED" << endl;
-        check_input_n_determine(str);  // Determining whether input is a Integer or String
+
+        if (isPalindrome(str)) {
+            cout << "Palindrome:" << str << endl;
+        } else {
+            cout << "NOT Palindrome:" << str << endl;
+        }
     } else {
         cout << "NO INPUT PROVIDED" << endl;
     }
