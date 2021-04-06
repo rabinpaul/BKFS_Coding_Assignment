@@ -1,0 +1,72 @@
+
+-- create a table
+CREATE TABLE CUSTOMER (
+  ID INTEGER PRIMARY KEY,
+  NAME TEXT NOT NULL,
+  COUNTRY TEXT NOT NULL,
+  CREDITS INTEGER NOT NULL
+);
+-- insert some values
+INSERT INTO CUSTOMER VALUES (1, 'Frances White', 'USA', 200350);
+INSERT INTO CUSTOMER VALUES (2, 'Carolyn Bradley', 'UK', 15354);
+INSERT INTO CUSTOMER VALUES (3, 'Annie Fernandez', 'France', 359200);
+INSERT INTO CUSTOMER VALUES (4, 'Ruth Hanson', 'Albania', 1060);
+INSERT INTO CUSTOMER VALUES (5, 'Paula Fuller', 'USA', 14789);
+INSERT INTO CUSTOMER VALUES (6, 'Bonnie Johnston', 'China', 100243);
+INSERT INTO CUSTOMER VALUES (7, 'Ruth Gutierrez', 'USA', 998999);
+INSERT INTO CUSTOMER VALUES (8, 'Ernest Thomas', 'Canada', 500500);
+INSERT INTO CUSTOMER VALUES (9, 'Joe Garza', 'UK', 18782);
+INSERT INTO CUSTOMER VALUES (10, 'Anne Harris', 'USA', 158367);
+
+
+-- fetch some values
+------> SQL Query for Question: 2
+
+SELECT * FROM CUSTOMER order by  CUSTOMER.NAME desc,  CUSTOMER.ID asc;  
+
+-- Output:
+
+4|Ruth Hanson|Albania|1060
+7|Ruth Gutierrez|USA|998999
+5|Paula Fuller|USA|14789
+9|Joe Garza|UK|18782
+1|Frances White|USA|200350
+8|Ernest Thomas|Canada|500500
+2|Carolyn Bradley|UK|15354
+6|Bonnie Johnston|China|100243
+3|Annie Fernandez|France|359200
+10|Anne Harris|USA|158367
+
+=========================
+
+-- create a table
+CREATE TABLE students (
+  ID INTEGER PRIMARY KEY,
+  NAME TEXT NOT NULL,
+  MARKS INTEGER NOT NULL
+);
+-- insert some values
+INSERT INTO students VALUES (1, 'Matt', 44);
+INSERT INTO students VALUES (2, 'John', 57);
+INSERT INTO students VALUES (3, 'Lucas', 78);
+
+
+-- fetch some values
+------> SQL Query for Question: 3
+
+SELECT ID as Id, NAME as Name, MARKS as Marks, 
+(case 
+    when marks > 90 then 'A+' 
+    when marks > 70 then 'A'
+    when marks > 50 then 'B'
+    when marks >= 40 then 'C'
+    when marks < 40 then 'Fail'
+end) as Grade
+ FROM students;
+ 
+-- Output:
+ 
+1|Matt|44|C
+2|John|57|B
+3|Lucas|78|A
+ ================================
