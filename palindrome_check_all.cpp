@@ -18,10 +18,9 @@ bool isNumber(string s)
 bool isPalindrome(string inpStr) {
 
     if (isNumber(inpStr)) {        // Handling Integer
-        cout << "Input is an Integer." << endl;
-
-        int origNum = stoi(inpStr);  // Temporary variable for assigning input variable
-        int revNum = 0, tmpOrig = 0, remainder;
+        long long int origNum = stoll(inpStr, nullptr, 10);  // Temporary variable for assigning long long int type variable
+        long long int revNum = 0, tmpOrig = 0;
+        int remainder;
 
         tmpOrig = origNum;
 
@@ -40,8 +39,6 @@ bool isPalindrome(string inpStr) {
     }
 
     // Handling String
-    cout << "Input is a String."  << endl;
-
     int n = inpStr.length() - 1;
     int l = 0;
 
@@ -67,16 +64,18 @@ int main()
 {
     string str; // Variable to take input
 
-    cout << "Enter Input to check Palindrome" << endl;
+    cout << "ENTER NUMBER TO CHECK PALINDROME....." << endl;
     getline(cin, str);   // Taking input as line
 
     if (str.length() > 0) {
-        cout << "VALID INPUT PROVIDED" << endl;
+
+        cout << "YOUR INPUT:: " << str << endl;
+        cout << " " << endl;
 
         if (isPalindrome(str)) {
-            cout << "Palindrome:" << str << endl;
+            cout << str << " ::Palindrome."  << endl;
         } else {
-            cout << "NOT Palindrome:" << str << endl;
+            cout << str << " ::NOT Palindrome." << endl;
         }
     } else {
         cout << "NO INPUT PROVIDED" << endl;
